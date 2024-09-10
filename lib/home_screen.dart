@@ -12,11 +12,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //we need to intilize list because the name of thr array is not defined in the API 
   List<PostModel> postList = [];
 
   Future<List<PostModel>> getPostAPI() async {
-    final response =
-        await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
+    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
       for (Map<String, dynamic> i in data) {
@@ -58,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('Title\n'+postList[index].title.toString()),
+                                SizedBox(height: 20,),
                                 Text('Description\n'+postList[index].title.toString())
 
                               ],
