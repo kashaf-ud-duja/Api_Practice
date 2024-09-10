@@ -48,12 +48,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return Text("Loading");
-                  }else{
+                  } else {
                     return ListView.builder(
-                      itemCount: postList.length,
-                      itemBuilder: (context ,index){
-                      return Text(index.toString());
-                    });
+                        itemCount: postList.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Title\n'+postList[index].title.toString()),
+                                Text('Description\n'+postList[index].title.toString())
+
+                              ],
+                            ),
+                          );
+                        });
                   }
                 }),
           )
