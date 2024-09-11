@@ -46,9 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
             child: FutureBuilder(
                 future: getPostAPI(),
                 builder: (context, snapshot) {
+                  //If the data hasn't arrived yet, it shows a simple Text widget saying "Loading." This informs the user that the app is fetching the data.
                   if (!snapshot.hasData) {
                     return Text("Loading");
                   } else {
+              //ListView.builder is used to display a scrollable list of items dynamically. In this case, the list will show the posts fetched from the API.
                     return ListView.builder(
                         itemCount: postList.length,
                         itemBuilder: (context, index) {
