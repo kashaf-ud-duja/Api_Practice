@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
+      //here we are taking two values string, dynamic it means that key is always in strimg while value can be of any type
       for (Map<String, dynamic> i in data) {
         postList.add(PostModel.fromJson(i));
       }
