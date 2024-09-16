@@ -13,8 +13,7 @@ class CustomScreen extends StatefulWidget {
 class _CustomScreenState extends State<CustomScreen> {
   List<Photos> PhotosList = [];
   Future<List<Photos>> getPhotosAPI() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
+    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
       for (Map<String, dynamic> i in data) {
