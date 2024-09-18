@@ -13,11 +13,12 @@ class CustomScreen extends StatefulWidget {
 class _CustomScreenState extends State<CustomScreen> {
   List<Photos> PhotosList = [];
   Future<List<Photos>> getPhotosAPI() async {
-    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
+    final response = await http
+        .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
       for (Map<String, dynamic> i in data) {
-        Photos photos = Photos(title: i['title'], url: i['url']);
+        Photos photos = Photos(title: i['title'], url: i['url'], id: i['id'],);
         PhotosList.add(photos);
       }
       return PhotosList;
@@ -45,15 +46,17 @@ class _CustomScreenState extends State<CustomScreen> {
                   future: getPhotosAPI(),
                   builder: (context, AsyncSnapshot<List<Photos>> snapshot) {
                     return ListView.builder(
-                      itemCount: PhotosList.length,
-                      itemBuilder: (context, snapshot) {
-                      return ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(snapshot.data![index].url.toString()),
-                        ),
-                        title: Text(snapshot.data[index].title.toString()),
-                      );
-                    });
+                        itemCount: PhotosList.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  snapshot.data![index].url.toString()),
+                            ),
+                            subtitle: Text('Notes id:'+snapshot.data![index].id.toString()) ,
+                            title: Text(snapshot.data![index].title.toString()),
+                          );
+                        });
                   }),
             )
           ],
@@ -63,5 +66,6 @@ class _CustomScreenState extends State<CustomScreen> {
 
 class Photos {
   String title, url;
-  Photos({required this.title, required this.url});
+ int id;
+  Photos({required this.title, required this.url,required this.id});
 }
